@@ -3,6 +3,7 @@ from sqlalchemy import event
 from .base.push_id import PushID
 
 from .user import User
+from .airplane import Airplane
 
 
 def save_push_id(mapper, connection, target):
@@ -12,7 +13,10 @@ def save_push_id(mapper, connection, target):
     target.id = PushID().next_id()
 
 
-database_tables = [User]
+database_tables = [
+    User,
+    Airplane,
+]
 
 for table in database_tables:  # pragma: no cover
     event.listen(table, 'before_insert', save_push_id)
