@@ -4,8 +4,11 @@ from .base.base_model import BaseModel
 
 class Flight(BaseModel):
     """Class for flight's model"""
+
+    __tablename__ = 'flights'
+
     airplane_id = db.Column(
-        db.String, db.ForeignKey('airplane.id'), nullable=False)
+        db.String, db.ForeignKey('airplanes.id'), nullable=False)
     flying_from = db.Column(db.String(400), nullable=False)
     flying_to = db.Column(db.String(400), nullable=False)
     departure = db.Column(db.DateTime, nullable=False)
@@ -14,4 +17,4 @@ class Flight(BaseModel):
 
     def __repr__(self):
         return (
-            f'<Airplane {self.flying_from} - {self.flying_to} ({self.date})>')
+            f'<Flight {self.flying_from} - {self.flying_to} ({self.date})>')
