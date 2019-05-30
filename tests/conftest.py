@@ -28,6 +28,7 @@ environ['FLASK_ENV'] = 'testing'
 pytest_plugins = [
     "tests.fixtures.user",
     "tests.fixtures.airplane",
+    "tests.fixtures.flight",
 ]
 
 
