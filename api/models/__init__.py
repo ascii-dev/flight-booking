@@ -4,6 +4,7 @@ from .base.push_id import PushID
 
 from .user import User
 from .airplane import Airplane
+from .flight import Flight
 
 
 def save_push_id(mapper, connection, target):
@@ -16,6 +17,7 @@ def save_push_id(mapper, connection, target):
 database_tables = [
     User,
     Airplane,
+    Flight,
 ]
 
 for table in database_tables:  # pragma: no cover
