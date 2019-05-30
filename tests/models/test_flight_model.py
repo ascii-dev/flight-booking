@@ -57,4 +57,4 @@ class TestFlightModel:
         flying_to = new_flight.flying_to
         date = new_flight.date
         assert repr(new_flight) == \
-            f'<Airplane {flying_from} - {flying_to} ({date})>'
+            f'<Flight {flying_from} - {flying_to} ({date})>'

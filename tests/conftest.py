@@ -29,6 +29,7 @@ pytest_plugins = [
     "tests.fixtures.user",
     "tests.fixtures.airplane",
     "tests.fixtures.flight",
+    "tests.fixtures.ticket",
 ]
 
 
