@@ -20,6 +20,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = getenv(
         'DATABASE_URI',
         'postgresql://localhost/flight_booking')
+    JWT_SECRET_KEY = getenv('JWT_SECRET_KEY_STAGING')
 
 
 class StagingConfig(Config):
@@ -31,7 +32,7 @@ class StagingConfig(Config):
 class ProductionConfig(Config):
     """App production configuration"""
 
-    pass
+    JWT_SECRET_KEY = getenv('JWT_SECRET_KEY_PRODUCTION')
 
 
 class DevelopmentConfig(Config):

@@ -12,7 +12,8 @@ def save_push_id(mapper, connection, target):
     """Function tto run the push id generator and save
     the id on insert
     """
-    target.id = PushID().next_id()
+    push_id = PushID()
+    target.id = push_id.next_id()
 
 
 database_tables = [

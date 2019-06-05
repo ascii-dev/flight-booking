@@ -95,4 +95,4 @@ class PushID(object):
                 self.last_rand_chars[i] = 0
             else:
                 break
-            self.last_rand_chars[i] += 1
+        self.last_rand_chars[i] += 1
