@@ -26,6 +26,7 @@ from api.models.database import db
 environ['FLASK_ENV'] = 'testing'
 
 pytest_plugins = [
+    "tests.fixtures.request_header",
     "tests.fixtures.user",
     "tests.fixtures.airplane",
     "tests.fixtures.flight",
