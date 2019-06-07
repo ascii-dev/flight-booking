@@ -10,4 +10,5 @@ serialization_messages = {
         hyphens, spaces and apostrophes',
     'string_length': 'Field must be {0} characters or less',
     'field_length': 'Field must be at least {0} characters',
+    'not_found': '{} not found',
 }
