@@ -51,6 +51,7 @@ class TestingConfig(Config):
         'TEST_DATABASE_URI',
         'postgresql://localhost/flight_booking_test')
     API_BASE_URL = getenv('API_BASE_URL', '/api/v1')
+    JWT_SECRET_KEY = getenv('JWT_SECRET_KEY_TEST')
 
 
 config = {
