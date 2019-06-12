@@ -14,7 +14,12 @@ class Flight(BaseModel):
     departure = db.Column(db.DateTime, nullable=False)
     arrival = db.Column(db.DateTime, nullable=False)
 
+    airplane = db.relationship(
+        'Airplane',
+        backref='airplane',
+        primaryjoin=
+        "and_(Flight.airplane_id == Airplane.id)")
+
     def __repr__(self):
         date = self.departure.date
-        return (
-            f'<Flight {self.flying_from} - {self.flying_to} ({date})>')
+        return f'<Flight {self.flying_from} - {self.flying_to} ({date})>'
