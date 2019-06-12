@@ -41,7 +41,8 @@ def create_app(config=AppConfig):
     import api.views
 
     # initialize migration scripts
-    migrate = Migrate(app, db)
+    migrate = Migrate(compare_type=True)
+    migrate.init_app(app, db)
 
     return app
 

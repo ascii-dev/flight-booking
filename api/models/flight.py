@@ -13,8 +13,8 @@ class Flight(BaseModel):
     flying_to = db.Column(db.String(400), nullable=False)
     departure = db.Column(db.DateTime, nullable=False)
     arrival = db.Column(db.DateTime, nullable=False)
-    date = db.Column(db.Date, nullable=False)
 
     def __repr__(self):
+        date = self.departure.date
         return (
-            f'<Flight {self.flying_from} - {self.flying_to} ({self.date})>')
+            f'<Flight {self.flying_from} - {self.flying_to} ({date})>')
