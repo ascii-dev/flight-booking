@@ -17,6 +17,5 @@ def new_flight(app, new_airplane):
         'flying_to': 'San Francisco, United States',
         'departure': dt.now(),
         'arrival': dt.now(),
-        'date': dt.now().date()
     }
     return Flight(**params)
