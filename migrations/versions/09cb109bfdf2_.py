@@ -164,6 +164,7 @@ def downgrade():
                         ['airplane.id'],
                         name='flight_airplane_id_fkey'),
                     sa.PrimaryKeyConstraint('id', name='pk_flight'))
+    op.execute("drop type ticketstatusenum CASCADE")
     op.drop_table('tickets')
     op.drop_table('flights')
     op.drop_table('airplanes')
