@@ -1,7 +1,9 @@
 """Module for base model"""
+import re
 
 from datetime import datetime as dt
 
+from api.utilities.validators.base_validator import ValidationError
 from ..database import db
 
 
@@ -39,3 +41,20 @@ class BaseModel(db.Model):  # pragma: no cover
         """
         db.session.delete(self)
         db.session.commit()
+
+    @classmethod
+    def get_or_404(cls, instance_id):
+        """
+        Gets an instance by id or returns 404
+        :param instance_id: the id of instance to get
+        :return: return instance or 404
+        """
+        instance = cls.query.filter_by(id=instance_id).first()
+        if not instance:
+            raise ValidationError(
+                {
+                    'message':
+                    f'{re.sub(r"(?<=[a-z])[A-Z]+",lambda x: f" {x.group(0).lower()}" , cls.__name__)} not found'  # noqa
+                },
+                404)
+        return instance
