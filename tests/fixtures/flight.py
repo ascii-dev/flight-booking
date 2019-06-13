@@ -1,5 +1,5 @@
 import pytest
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 from api.models import Flight
 
 
@@ -11,11 +11,12 @@ def new_flight(app, new_airplane):
     :return: a new flight instance
     """
     new_airplane.save()
+    tomorrow = dt.now() + timedelta(1)
     params = {
         'airplane_id': new_airplane.id,
         'flying_from': 'Lagos, Nigeria',
         'flying_to': 'San Francisco, United States',
-        'departure': dt.now(),
-        'arrival': dt.now(),
+        'departure': tomorrow.strftime("%Y-%m-%d %H:%M:%S"),
+        'arrival': tomorrow.strftime("%Y-%m-%d %H:%M:%S"),
     }
     return Flight(**params)
