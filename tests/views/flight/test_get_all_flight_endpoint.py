@@ -11,7 +11,7 @@ BASE_URL = AppConfig.API_BASE_URL
 class TestFlightCreationEndpoints:
     """Class that holds tests for endpoint for getting all flights"""
 
-    def test_admin_create_new_flight_valid_data_succeeds(
+    def test_get_all_flights_succeeds(
             self, init_db, request_header, client, new_flight):
         """
         Should return a 200 success status message with flight
