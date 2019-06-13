@@ -1,4 +1,4 @@
-"""Module to test new airplane endpoint"""
+"""Module to test new flight endpoint"""
 from flask import json
 from api.utilities.constants import CHARSET
 from api.utilities.messages.error import error_messages
@@ -13,7 +13,7 @@ BASE_URL = AppConfig.API_BASE_URL
 
 
 class TestFlightCreationEndpoints:
-    """Class that holds tests for new airplane endpoint"""
+    """Class that holds tests for new flight endpoint"""
 
     def test_admin_create_new_flight_valid_data_succeeds(
             self, init_db, admin_auth_header, client, new_airplane):
@@ -45,7 +45,6 @@ class TestFlightCreationEndpoints:
         assert 'to' in flight and type(flight['to']) == str
         assert 'departure' in flight and type(flight['departure']) == str
         assert 'arrival' in flight and type(flight['arrival']) == str
-        assert 'date' in flight and type(flight['date']) == str
         assert 'id' in airplane and type(airplane['id']) == str
         assert 'model' in airplane and type(airplane['model']) == str
         assert 'brand' in airplane and type(airplane['brand']) == str

@@ -7,6 +7,7 @@ from main import api
 
 from ..models.airplane import Airplane
 from ..utilities.messages.success import success_messages
+from ..utilities.helpers.return_value import return_value
 from ..utilities.validators.base_validator import ValidationError
 from ..utilities.messages.serialization import serialization_messages
 from ..utilities.validators.validate_json_request import validate_json_request
@@ -39,8 +40,8 @@ class AirplanesResource(Resource):
         airplane = Airplane(**airplane_data)
         airplane.save()
 
-        return {
-            "status": "success",
-            "message": success_messages['created'].format('Airplane'),
-            "data": schema.dump(airplane).data,
-        }, 201
+        return return_value(status="success",
+                            message=success_messages[
+                                'created'].format('Airplane'),
+                            data=schema.dump(airplane).data,
+                            status_code=201)

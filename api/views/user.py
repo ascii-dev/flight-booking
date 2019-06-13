@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash
 from main import api
 
 from ..models.user import User
+from ..utilities.helpers.return_value import return_value
 from ..utilities.messages.success import success_messages
 from ..utilities.helpers.generate_token import generate_token
 from ..utilities.validators.base_validator import ValidationError
@@ -40,15 +41,16 @@ class UsersResource(Resource):
         user.save()
 
         token = generate_token(user)
+        data = {
+            "token": token,
+            "user": schema.dump(user).data,
+        }
 
-        return {
-            "status": "success",
-            "message": success_messages['created'].format('User'),
-            "data": {
-                "token": token,
-                "user": schema.dump(user).data,
-            },
-        }, 201
+        return return_value(status="success",
+                            message=success_messages[
+                                'created'].format('User'),
+                            data=data,
+                            status_code=201)
 
 
 @api.route('/users/login')
@@ -73,11 +75,12 @@ class LoginResource(Resource):
         token = generate_token(user)
         schema = UserSchema()
 
-        return {
-            "message": success_messages['retrieved'].format('User'),
-            "data": {
-                "token": token,
-                "user": schema.dump(user).data
-            },
-            "status": "success"
-        }, 200
+        data = {
+            "token": token,
+            "user": schema.dump(user).data,
+        }
+
+        return return_value(status="success",
+                            message=success_messages[
+                                'retrieved'].format('User'),
+                            data=data)
