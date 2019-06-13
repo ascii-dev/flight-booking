@@ -47,7 +47,7 @@ class AirplaneFlightsResource(Resource):
 
 @api.route('/flights')
 class FlightsResource(Resource):
-    """Resource for flight creation"""
+    """Resource for flight """
 
     def get(self):
         """Get all flight records in the database that are
@@ -64,3 +64,23 @@ class FlightsResource(Resource):
                             message=success_messages[
                                 'retrieved'].format('Flight'),
                             data=schema.dump(flights).data)
+
+
+@api.route('/flights/<string:flight_id>')
+class SingleFlightResource(Resource):
+    """Resource for single flight"""
+
+    def get(self, flight_id):
+        """
+        Get a single flight record from the database
+        :param flight_id: the id of the flight to get
+        :return: status, success message, relevant flight
+        """
+        flight = Flight.get_or_404(flight_id)
+
+        schema = FlightSchema()
+
+        return return_value(data=schema.dump(flight).data,
+                            message=success_messages[
+                                'retrieved'].format('Flight'),
+                            status="success")
