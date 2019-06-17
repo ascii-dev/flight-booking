@@ -18,5 +18,14 @@ class Ticket(BaseModel):
         nullable=False,
         default='pending')
 
+    user = db.relationship(
+        'User',
+        backref='user',
+        primaryjoin="and_(Ticket.user_id==User.id)")
+    flight = db.relationship(
+        'Flight',
+        backref='flight',
+        primaryjoin="and_(Ticket.flight_id==Flight.id)")
+
     def __repr__(self):
         return f'<Ticket {self.status}>'

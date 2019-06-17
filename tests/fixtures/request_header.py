@@ -35,6 +35,7 @@ def user_auth_header(new_user):
     user = new_user.save()
     return {
         'Authorization': f'Bearer {generate_test_token(user)}',
+        'User': user,
         'Content-Type': MIMETYPE,
         'Accept': MIMETYPE
     }

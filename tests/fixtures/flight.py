@@ -20,3 +20,8 @@ def new_flight(app, new_airplane):
         'arrival': tomorrow.strftime("%Y-%m-%d %H:%M:%S"),
     }
     return Flight(**params)
+
+
+@pytest.fixture(scope='module')
+def new_flight_no_capacity(app, new_airplane):
+    pass
