@@ -1,6 +1,9 @@
 """Module that holds tickets endpoints"""
+from datetime import date
+
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restplus import Resource
+from sqlalchemy import func
 
 from api.utilities.helpers.return_value import return_value
 from api.utilities.messages.error import error_messages
@@ -17,7 +20,7 @@ from ..schemas.ticket import TicketSchema
 
 
 @api.route('/flights/<string:flight_id>/book')
-class TicketsResource(Resource):
+class FlightTicketsResource(Resource):
     """Resource for ticket creation"""
 
     @jwt_required
@@ -53,3 +56,22 @@ class TicketsResource(Resource):
                                 'created'].format('Ticket'),
                             status="success",
                             status_code=201)
+
+
+@api.route('/tickets')
+class TicketsResource(Resource):
+    """Resource for tickets """
+
+    def get(self):
+        """Get all tickets records in the database for a specific day
+        :return: status, success message and relevant tickets
+        """
+        tickets = Ticket.query.filter(
+            func.DATE(Flight.created_at) == date.today()).all()
+
+        schema = TicketSchema(many=True)
+
+        return return_value(message=success_messages[
+                                'retrieved'].format('Ticket'),
+                            status="success",
+                            data=schema.dump(tickets).data)

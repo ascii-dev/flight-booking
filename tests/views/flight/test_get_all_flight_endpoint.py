@@ -8,7 +8,7 @@ from config import AppConfig
 BASE_URL = AppConfig.API_BASE_URL
 
 
-class TestFlightCreationEndpoints:
+class TestGetFlightEndpoints:
     """Class that holds tests for endpoint for getting all flights"""
 
     def test_get_all_flights_succeeds(
