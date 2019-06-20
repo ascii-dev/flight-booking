@@ -16,6 +16,8 @@ pytest-cov = "*"
 numpy = "*"
 flask-marshmallow = "*"
 flask-jwt-extended = "*"
+redis = "*"
+celery = "*"
 
 [dev-packages]
 

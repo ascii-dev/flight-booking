@@ -21,6 +21,10 @@ class Config:
         'DATABASE_URI',
         'postgresql://localhost/flight_booking')
     JWT_SECRET_KEY = getenv('JWT_SECRET_KEY_STAGING')
+    CELERY_BROKER_URL = getenv(
+        'CELERY_BROKER_URL_STAGING', 'redis://localhost:6379/0')
+    CELERY_RESULT_BACKEND = getenv(
+        'CELERY_RESULT_BACKEND_STAGING', 'redis://localhost:6379/0')
 
 
 class StagingConfig(Config):
@@ -33,6 +37,10 @@ class ProductionConfig(Config):
     """App production configuration"""
 
     JWT_SECRET_KEY = getenv('JWT_SECRET_KEY_PRODUCTION')
+    CELERY_BROKER_URL = getenv(
+        'CELERY_BROKER_URL_PRODUCTION', 'redis://localhost:6379/0')
+    CELERY_RESULT_BACKEND = getenv(
+        'CELERY_RESULT_BACKEND_PRODUCTION', 'redis://localhost:6379/0')
 
 
 class DevelopmentConfig(Config):
