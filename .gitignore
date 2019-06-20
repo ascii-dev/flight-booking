@@ -109,3 +109,6 @@ venv.bak/
 htmlcov/
 .pytest_cache
 coverage.xml
+
+/redis-stable
+dump.rdb
