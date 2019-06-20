@@ -1,0 +1,13 @@
+{% extends '/email/base.html' %}
+
+{% block content %}
+   <h2 class="email-greetings">
+      <strong>Hi {{ data.first_name }} {{data.last_name}} !</strong>
+   </h2>
+   <p class="email-body-content">
+      We're writing to remind you that according the your flight ticket
+       purchase with us, you're billed to travel tomorrow. Kindly make
+       sure to prepare with this in mind.
+   </p>
+   <p class="thanks">Thank you</p>
+{% endblock %}
