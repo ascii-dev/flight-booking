@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_restplus import Api
 from flask_jwt_extended import JWTManager
 from celery import Celery
+from flask_mail import Mail
 
 from config import AppConfig
 
@@ -15,6 +16,7 @@ from api.models.database import db
 
 api = Api(api_blueprint, doc='/')
 celery_app = Celery(__name__, broker=AppConfig.CELERY_BROKER_URL)
+mail = Mail()
 
 
 def initialize_error_handlers(application):
@@ -30,6 +32,7 @@ def create_app(config=AppConfig):
     app.config.from_object(config)
     app.url_map.strict_slashes = False
     celery_app.conf.update(app.config)
+    mail.init_app(app)
 
     # error handlers
     initialize_error_handlers(app)

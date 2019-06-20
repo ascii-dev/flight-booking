@@ -25,9 +25,9 @@ class Config:
         'CELERY_BROKER_URL_STAGING', 'redis://localhost:6379/0')
     CELERY_RESULT_BACKEND = getenv(
         'CELERY_RESULT_BACKEND_STAGING', 'redis://localhost:6379/0')
-    MAIL_PASSWORD = getenv('FLASK_MAIL_PASSWORD')
-    MAIL_DEFAULT_SENDER = getenv('FLASK_MAIL_USERNAME')
-    MAIL_USERNAME = getenv('FLASK_MAIL_USERNAME')
+    MAIL_PASSWORD = getenv('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = getenv('MAIL_DEFAULT_SENDER')
+    MAIL_USERNAME = getenv('MAIL_USERNAME')
     MAIL_PORT = 587
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_USE_TLS = True
