@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a2ce78a4b44d4aa41c2398169679e8370ba42f4d9e9b1efd489335f521309bd2"
+            "sha256": "9a9b01df523fecaf707fe5e187870afab166f4b61a4574c19052301b133350b0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -70,12 +70,26 @@
             "index": "pypi",
             "version": "==4.3.0"
         },
+        "certifi": {
+            "hashes": [
+                "sha256:046832c04d4e752f37383b628bc601a7ea7211496b4638f6514d0e5b9acc4939",
+                "sha256:945e3ba63a0b9f577b1395204e13c3a231f9bc0223888be653286534e5873695"
+            ],
+            "version": "==2019.6.16"
+        },
         "click": {
             "hashes": [
                 "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
                 "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
             ],
             "version": "==7.0"
+        },
+        "cloudinary": {
+            "hashes": [
+                "sha256:73ba5a634483d12cfdfb3ebf8354f1ac0a62ee866b49d52950ff871ac64e31c0"
+            ],
+            "index": "pypi",
+            "version": "==1.16.0"
         },
         "coverage": {
             "hashes": [
@@ -255,6 +269,13 @@
             ],
             "version": "==2.19.5"
         },
+        "mock": {
+            "hashes": [
+                "sha256:83657d894c90d5681d62155c82bda9c1187827525880eda8ff5df4ec813437c3",
+                "sha256:d157e52d4e5b938c550f39eb2fd15610db062441a9c2747d3dbfa9298211d0f8"
+            ],
+            "version": "==3.0.5"
+        },
         "more-itertools": {
             "hashes": [
                 "sha256:2112d2ca570bb7c3e53ea1a35cd5df42bb0fd10c45f0fb97178679c3c03d64c7",
@@ -416,6 +437,13 @@
                 "sha256:c30925d60af95443458ebd7525daf791f55762b106049ae71e18f8dd58084c2f"
             ],
             "version": "==1.3.5"
+        },
+        "urllib3": {
+            "hashes": [
+                "sha256:b246607a25ac80bedac05c6f282e3cdaf3afb65420fd024ac94435cabe6e18d1",
+                "sha256:dbe59173209418ae49d485b87d1681aefa36252ee85884c31346debd19463232"
+            ],
+            "version": "==1.25.3"
         },
         "vine": {
             "hashes": [
