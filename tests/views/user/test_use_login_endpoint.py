@@ -23,7 +23,6 @@ class TestUserLoginEndpoints:
         :param client: fixture to get a flask test client
         :return: assertions
         """
-        # import pdb; pdb.set_trace()
         password = new_user.password
         new_user.save()
         login_data = {

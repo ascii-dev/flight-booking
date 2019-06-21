@@ -31,6 +31,9 @@ class Config:
     MAIL_PORT = 587
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_USE_TLS = True
+    CLOUDINARY_CLOUD_NAME = getenv('CLOUDINARY_CLOUD_NAME')
+    CLOUDINARY_API_KEY = getenv('CLOUDINARY_API_KEY')
+    CLOUDINARY_API_SECRET = getenv('CLOUDINARY_API_SECRET')
 
 
 class StagingConfig(Config):

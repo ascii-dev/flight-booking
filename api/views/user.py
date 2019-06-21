@@ -1,9 +1,13 @@
 """Module that holds users endpoints"""
 from flask import request
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_restplus import Resource
 from werkzeug.security import check_password_hash
+import cloudinary
+import cloudinary.uploader
 
 from main import api
+from config import AppConfig
 
 from ..models.user import User
 from ..utilities.helpers.return_value import return_value
@@ -13,6 +17,13 @@ from ..utilities.validators.base_validator import ValidationError
 from ..utilities.messages.serialization import serialization_messages
 from ..utilities.validators.validate_json_request import validate_json_request
 from ..schemas.user import UserSchema
+
+
+cloudinary.config.update = ({
+    'cloud_name': AppConfig.CLOUDINARY_CLOUD_NAME,
+    'api_key': AppConfig.CLOUDINARY_API_KEY,
+    'api_secret': AppConfig.CLOUDINARY_API_SECRET
+})
 
 
 @api.route('/users')
@@ -84,3 +95,28 @@ class LoginResource(Resource):
                             message=success_messages[
                                 'retrieved'].format('User'),
                             data=data)
+
+
+@api.route('/users/passport')
+class PassportResource(Resource):
+    """Resource for user login"""
+
+    @jwt_required
+    def post(self):
+        """
+        Uploads passport photograph for a user
+        :return: status, success message and relevant user details
+        """
+        user = User.get_or_404(get_jwt_identity()['id'])
+        user.update(
+            passport_photograph=cloudinary.uploader.upload(
+                request.files['passport']))
+
+        schema = UserSchema()
+        user = schema.dump(user).data
+
+        return return_value(data=user,
+                            status="success",
+                            message=success_messages[
+                                'created'].format('Passport'),
+                            status_code=201)
