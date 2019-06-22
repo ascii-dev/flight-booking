@@ -23,7 +23,8 @@ class TestPassportCreationEndpoint:
         cloudinary.uploader.upload = mock.Mock(
             return_value={'url': 'someimage'})
         asset = "6e609595.jpeg"
-        passport = os.path.join(os.path.dirname(__file__), f"./assets/{asset}")
+        passport = os.path.join(
+            os.path.dirname(__file__), f"../../../templates/assets/{asset}")
         response = client.post(
             f'{BASE_URL}/users/passport',
             headers=user_auth_header,

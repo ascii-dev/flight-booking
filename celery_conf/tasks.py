@@ -3,6 +3,7 @@ from datetime import datetime as dt, timedelta
 
 from flask import render_template
 from sqlalchemy import func
+import cloudinary
 
 from api.models import Ticket, Flight
 from api.utilities.email import FlaskMailSender
@@ -33,3 +34,12 @@ def travel_reminder():
             recipients=[ticket.user.email],
             subject="Travel reminder",
             body=email_body)
+
+
+@celery_app.task(name="delete_passport")
+def delete_passport(public_id):
+    """Deletes a user's passport from cloudinary once
+    it gets deleted locally
+    :param public_id: the id of image to be deleted
+    """
+    cloudinary.api.delete_resources([public_id])
