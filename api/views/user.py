@@ -104,6 +104,16 @@ class LoginResource(Resource):
 class PassportResource(Resource):
     """Resource for user login"""
 
+    # @staticmethod
+    # def upload_to_cloudinary(file):
+    #     return cloudinary.uploader.upload(file)
+    #
+    # @staticmethod
+    # def delete_cloudinary(self, public_id):
+    #     delete_from_cloudinary = adapt_resource_to_env(
+    #         delete_passport.delay)
+    #     delete_from_cloudinary(public_id)
+
     @jwt_required
     def post(self):
         """
@@ -142,3 +152,25 @@ class PassportResource(Resource):
         return return_value(status="success",
                             message=success_messages[
                                 'deleted'].format('Passport'))
+
+    @jwt_required
+    def patch(self):
+        """
+        Updates a user's passport photograph both locally and
+        on cloudinary
+        :return: status, success message
+        """
+        user = User.get_or_404(get_jwt_identity()['id'])
+
+        delete_from_cloudinary = adapt_resource_to_env(
+            delete_passport.delay)
+        delete_from_cloudinary(user.passport_photograph['public_id'])
+
+        user.update(passport_photograph=cloudinary.uploader.upload(
+                request.files['passport']))
+        user = UserSchema().dump(user).data
+
+        return return_value(status="success",
+                            data=user,
+                            message=success_messages[
+                                'updated'].format('Passport'))
