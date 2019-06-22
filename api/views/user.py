@@ -9,6 +9,8 @@ import cloudinary.uploader
 from main import api
 from config import AppConfig
 
+from celery_conf.tasks import delete_passport
+
 from ..models.user import User
 from ..utilities.helpers.return_value import return_value
 from ..utilities.messages.success import success_messages
@@ -16,6 +18,7 @@ from ..utilities.helpers.generate_token import generate_token
 from ..utilities.validators.base_validator import ValidationError
 from ..utilities.messages.serialization import serialization_messages
 from ..utilities.validators.validate_json_request import validate_json_request
+from ..utilities.helpers.adapt_resource_to_env import adapt_resource_to_env
 from ..schemas.user import UserSchema
 
 
@@ -120,3 +123,22 @@ class PassportResource(Resource):
                             message=success_messages[
                                 'created'].format('Passport'),
                             status_code=201)
+
+    @jwt_required
+    def delete(self):
+        """
+        Deletes a user's passport photograph both locally and
+        on cloudinary
+        :return: status, success message
+        """
+        user = User.get_or_404(get_jwt_identity()['id'])
+
+        delete_from_cloudinary = adapt_resource_to_env(
+            delete_passport.delay)
+        delete_from_cloudinary(user.passport_photograph['public_id'])
+
+        user.update(passport_photograph=None)
+
+        return return_value(status="success",
+                            message=success_messages[
+                                'deleted'].format('Passport'))

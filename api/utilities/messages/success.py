@@ -3,4 +3,5 @@
 success_messages = {
     'created': '{} created successfully',
     'retrieved': '{} retrieved successfully',
+    'deleted': '{} deleted successfully',
 }
