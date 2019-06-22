@@ -15,7 +15,6 @@ def new_user(app, init_db):
     :param init_db: fixture to initialize the db
     :return: a new user instance
     """
-    print(fake.name())
     params = {
         'first_name': 'Samuel',
         'last_name': 'Afolaranmi',
