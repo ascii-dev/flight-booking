@@ -1,0 +1,4 @@
+flight_booking_db/
+.vscode
+.env.sample
+tests/
