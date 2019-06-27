@@ -66,4 +66,7 @@ RUN rm -rf .cache
 COPY . .
 
 #  command used to create the virtual environment before the application is started
-CMD ["/bin/bash","-c","source /root/.local/share/virtualenvs/activo-api-*/bin/activate"]
+#CMD ["/bin/bash","-c","source /root/.local/share/virtualenvs/flight-booking-*/bin/activate"]
+
+#  the entry point where the application can be started on
+CMD ["docker/start_api.sh"]

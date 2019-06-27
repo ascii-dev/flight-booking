@@ -14,7 +14,7 @@ class Config:
     DEBUG = False
     TESTING = False
     FLASK_ENV = getenv('FLASK_ENV', 'production')
-    PORT = getenv('PORT', 5000)
+    PORT = int(getenv('PORT', 5000))
     SWAGGER_URL = '/'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = getenv(

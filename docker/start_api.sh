@@ -1,4 +1,5 @@
 #!/bin/bash
+env >> .env
 
 sleep 10
 source /root/.local/share/virtualenvs/flight-booking-*/bin/activate
@@ -21,12 +22,12 @@ echo " "
 echo "<<<<<<<<<<<<<<<<<<<< START Celery >>>>>>>>>>>>>>>>>>>>>>>>"
 
 # start Celery worker
-celery worker -A celery_worker.celery_app --loglevel=info &
+# celery worker -A celery_worker.celery_app --loglevel=info &
 
 # start celery beat
-celery -A celery_conf.celery_periodic_scheduler beat --loglevel=info &
+# celery -A celery_conf.celery_periodic_scheduler beat --loglevel=info &
 
 sleep 10
 echo "<<<<<<<<<<<<<<<<<<<< START API >>>>>>>>>>>>>>>>>>>>>>>>"
 # Start the API with gunicorn
-gunicorn --access-logfile '-' --workers 2 manage:app -b 0.0.0.0:5000
+gunicorn --access-logfile '-' --workers 2 manage:app -b 0.0.0.0:$PORT
